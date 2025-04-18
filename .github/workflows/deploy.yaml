@@ -11,8 +11,14 @@ jobs:
         steps:
             -   name: Checkout Repository
                 uses: actions/checkout@v4.2.2
-            -   name: abc (temp)
-                run: mkdir ./build && echo "<div>Test</div>" > ./build/index.html
+            -   name: Setup NodeJS
+                uses: actions/setup-node@v4
+                with:
+                    node-version: 18
+            -   name: Install Dependencies
+                run: npm install
+            -   name: Build the Page
+                run: npm run build
             -   name: Upload Build-Artifacts
                 uses: actions/upload-pages-artifact@v3.0.1
                 id: deployment
