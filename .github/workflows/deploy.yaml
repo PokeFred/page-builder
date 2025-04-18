@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        steps:
+            -   name: Checkout Repository
+                uses: actions/checkout@v4.2.2
+            -   name: abc (temp)
+                run: mkdir ./build && echo "<div>Test</div>" > ./build/index.html
+            -   name: Upload Build-Artifacts
+                uses: actions/upload-pages-artifact@v3.0.1
+                id: deployment
+                with:
+                    path: ./build
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        permissions:
+            pages: write
+            id-token: write
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Deploy to GitHub Pages
+                uses: actions/deploy-pages@v4.0.5
+                id: deployment
