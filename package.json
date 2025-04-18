@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "build": "tsx ./src/main.ts"
+        "build": "tsx ./builder/main.ts"
     },
     "devDependencies": {
         "@types/node": "^22.14.1",
